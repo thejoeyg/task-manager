@@ -38,4 +38,13 @@ RSpec.describe Task, type: :model do
       expect(results.first.id).to eq(non_urgent_task.id)
     end
   end
+
+  describe 'validations' do
+    it 'validates name and description' do
+      task = Task.new(title: 'Title', description: 'description')
+      task.valid?
+
+      expect(task.title).to eq('Title')
+    end
+  end
 end

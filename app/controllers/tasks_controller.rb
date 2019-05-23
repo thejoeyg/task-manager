@@ -8,7 +8,7 @@ class TasksController < ApplicationController
 
   def create
     task = @project.tasks.create(task_params)
-
+    redirect_to project_path(@project.id)
   end
 
   def show; end
@@ -16,12 +16,12 @@ class TasksController < ApplicationController
 
   def update
     @task.update_attributes!(task_params)
-    render :show
+    redirect_to project_path(@project.id)
   end
 
   def destroy
     @task.destroy
-    head :no_content
+    redirect_to project_path(@project.id)
   end
 
   private

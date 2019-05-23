@@ -1,12 +1,19 @@
-%h1= "Update a #{@task.title} for #{@project.name}"
+%h1= "#{@task.title} for #{@project.name}"
+%p= link_to "Back To Project", project_path(@project.id)
+%p= link_to "Add Task", new_project_task_path(@project.id)
 
 = form_tag project_task_path(@project.id, @task.id), method: :put, class: 'justify-content-center' do
   %div{class: 'form-group'}
     %p= text_field_tag :title, @task.title, class: 'form-control', required: true, title: 'Task Title', placeholder: 'Task Title'
     %p= text_area_tag :description, @task.description, class: 'form-control', required: true, title: 'Task Description', placeholder: 'Task Description'
+  %div{class: 'form-check form-check-inline mx-2'}
+    = label :urgent, 'Urgent', class: 'form-check-label mx-2'
+    = hidden_field_tag :urgent, false
+    = check_box_tag :urgent, true, class: 'form-check-input mx-2'
   %div{class: 'form-check form-check-inline'}
-    = check_box_tag :urgent, true, class: 'form-check-input'
-    = label :urgent, 'Urgent', class: 'form-check-label'
+    = label :complete, 'Complete', class: 'form-check-label mx-2'
+    = hidden_field_tag :complete, false
+    = check_box_tag :complete, true, @task.complete?, class: 'form-check-input mx-2'
   %div{class: 'form-group'}
     = date_field_tag :deadline_at, @task.deadline_at, title: 'Deadline Date'
     = label :deadline_at, 'Deadline'

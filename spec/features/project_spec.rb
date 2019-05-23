@@ -30,7 +30,7 @@ RSpec.describe 'Project Management', type: :feature do
   end
 
   scenario 'User sees project and its tasks' do
-  visit project_path(project_1.id)
+    visit project_path(project_1.id)
     expect(page).to have_content(project_1.name)
     expect(page).to have_content(task_1.title)
   end

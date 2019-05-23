@@ -5,7 +5,8 @@
     %p= text_field_tag :title, nil, class: 'form-control', required: true, title: 'Task Title', placeholder: 'Task Title'
     %p= text_area_tag :description, nil, class: 'form-control', required: true, title: 'Task Description', placeholder: 'Task Description'
   %div{class: 'form-check form-check-inline'}
-    = check_box_tag :urgent, nil, class: 'form-check-input'
+    = hidden_field_tag :urgent, false
+    = check_box_tag :urgent, true, class: 'form-check-input'
     = label :urgent, 'Urgent', class: 'form-check-label'
   %div{class: 'form-group'}
     = date_field_tag :deadline_at, title: 'Deadline Date'

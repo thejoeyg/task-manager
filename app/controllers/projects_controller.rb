@@ -7,12 +7,12 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.create!(project_params)
-    render :show
+    redirect_to project_path(@project.id)
   end
 
   def new; end
 
-  def show; 
+  def show
     @tasks = @project.tasks
   end
 
@@ -26,7 +26,8 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-
+    
+    redirect_to projects_path
   end
 
   private
