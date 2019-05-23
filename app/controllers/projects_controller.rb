@@ -1,34 +1,33 @@
-class Api::V1::ProjectsController < ApplicationController
-  before_action :find_project, except: [:index, :create]
+class ProjectsController < ApplicationController
+  before_action :find_project, except: [:index, :create, :new]
 
   def index
     @projects = Project.all
-    render json: @projects
   end
 
   def create
     @project = Project.create!(project_params)
-    render json: @project, status: :created
+    render :show
   end
 
-  def show
-    render json: @project
-  end
+  def new; end
+
+  def show; end
 
   def update
     @project.update(project_params)
-    head :no_content
+    render :show
   end
 
   def destroy
     @project.destroy
-    head :no_content
+
   end
 
   private
 
   def project_params
-    params.require(:project).permit([:name])
+    params.permit([:name])
   end
 
   def find_project

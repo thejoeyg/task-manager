@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CreateTasks < ActiveRecord::Migration[5.2]
   def change
     create_table :tasks do |t|
@@ -12,6 +10,6 @@ class CreateTasks < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :tasks, :urgent
+    add_index :tasks, :urgent, :complete
   end
 end

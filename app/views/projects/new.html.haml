@@ -1,0 +1,7 @@
+%h1 Create a New Project
+
+= form_tag projects_path, method: :post, class: 'justify-content-center' do
+  %p= text_field_tag :name, nil, class: 'form-control', required: true, title: 'Project Name', placeholder: 'Project Name'
+  %p= button_tag 'Create Task', value: 'create_task', class: 'btn btn-primary'
+
+          
