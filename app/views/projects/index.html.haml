@@ -1,2 +1,4 @@
+%h1 Projects
+
 - @projects.each do |project|
-  %p= link_to project.name, project_path(project.id) 
+  %p= link_to "#{project.name} (#{project.tasks.open_tasks.count})", project_path(project.id) 

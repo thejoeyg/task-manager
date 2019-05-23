@@ -8,7 +8,7 @@ class TasksController < ApplicationController
 
   def create
     task = @project.tasks.create(task_params)
-    
+
   end
 
   def show; end
@@ -16,7 +16,7 @@ class TasksController < ApplicationController
 
   def update
     @task.update_attributes!(task_params)
-    head :no_content
+    render :show
   end
 
   def destroy

@@ -6,4 +6,5 @@ class Task < ApplicationRecord
   scope :urgent, -> { where(urgent: true) }
   scope :non_urgent, -> { where(urgent: false) }
   scope :open_tasks, -> { where(complete: false) }
+  scope :closed_tasks, -> { where(complete: true) }
 end

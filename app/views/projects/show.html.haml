@@ -1,0 +1,59 @@
+%h1= "Update #{@project.name}"
+
+%p= link_to "Add Task", new_project_task_path(@project.id) 
+= form_tag project_path(@project.id), method: :put, class: 'justify-content-center' do
+  %p= text_field_tag :name, @project.name, class: 'form-control', required: true, title: 'Project Name', placeholder: 'Project Name'
+  %p= button_tag 'Update Project Name', value: 'update_project', class: 'btn btn-primary'
+
+- if @tasks.urgent.open_tasks.count > 0
+  %h3{class: 'text-secondary my-1'}  Urgent Tasks
+
+  %div{class: 'my-2 border border-secondary rounded'}
+    %div{class: 'row border-bottom border-secondary'}
+      %div{class: 'col-sm ml-2'}
+        Title
+      %div{class: 'col-sm ml-2'}
+        Urgent
+      %div{class: 'col-sm ml-2'}
+        Deadline
+
+    - @tasks.urgent.open_tasks.each do |task|
+      %div{class: 'row my-2'}
+        %div{class: 'col-sm ml-2'}
+          = link_to task.title, project_task_path(@project.id, task.id), class: 'text-danger'
+        %div{class: 'col-sm ml-2'}
+          = task.urgent.to_s.titleize
+        %div{class: 'col-sm ml-2'}
+          = local_time(task.deadline_at) if task.deadline_at
+
+- if @tasks.non_urgent.open_tasks.count > 0
+  %h3{class: 'text-secondary my-1'} Backlog Tasks
+
+  %div{class: 'row my-2 border border-secondary rounded'}
+    %div{class: 'col-sm ml-2'}
+      Title
+    %div{class: 'col-sm ml-2'}
+      Urgent
+    %div{class: 'col-sm ml-2'}
+      Deadline
+
+  - @tasks.non_urgent.open_tasks.each do |task|
+    %div{class: 'row'}
+      %div{class: 'col-sm ml-2'}
+        = link_to task.title, project_task_path(@project.id, task.id), class: 'text-warning'
+      %div{class: 'col-sm ml-2'}
+        = task.urgent.to_s.titleize
+      %div{class: 'col-sm ml-2'}
+        = local_time(task.deadline_at) if task.deadline_at
+
+- if @project.tasks.closed_tasks.count > 0
+  %h3{class: 'text-secondary my-1'}  Closed Tasks
+
+  %div{class: 'row'}
+    %div{class: 'col-sm ml-2'}
+      Title
+
+  - @project.tasks.closed_tasks.each do |task|
+    %div{class: 'row'}
+      %div{class: 'col-sm ml-2'}
+        = link_to task.title, project_task_path(@project.id, task.id), class: 'text-success'

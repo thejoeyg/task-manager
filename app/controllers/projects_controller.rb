@@ -12,11 +12,16 @@ class ProjectsController < ApplicationController
 
   def new; end
 
-  def show; end
+  def show; 
+    @tasks = @project.tasks
+  end
+
+  def edit; end
 
   def update
     @project.update(project_params)
-    render :show
+
+    redirect_to project_path(@project.id)
   end
 
   def destroy
