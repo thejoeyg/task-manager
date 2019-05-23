@@ -10,6 +10,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :tasks, :urgent, :complete
+    add_index :tasks, :urgent
+    add_index :tasks, :complete
   end
 end
