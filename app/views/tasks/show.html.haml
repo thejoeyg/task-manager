@@ -13,8 +13,9 @@
   %div{class: 'form-check form-check-inline'}
     = label :complete, 'Complete', class: 'form-check-label mx-2'
     = hidden_field_tag :complete, false
-    = check_box_tag :complete, true, @task.complete?, class: 'form-check-input mx-2'
+    = check_box_tag :complete, true, class: 'form-check-input mx-2'
   %div{class: 'form-group'}
     = date_field_tag :deadline_at, @task.deadline_at, title: 'Deadline Date'
     = label :deadline_at, 'Deadline'
-  %p= button_tag 'Update Task', value: 'create_task', class: 'btn btn-primary'
+  %p= button_tag 'Update Task', value: 'update_task', class: 'btn btn-primary'
+%p= button_to 'Delete Task', project_task_path(@task.project_id, @task.id), method: :delete, class: 'btn btn-danger'

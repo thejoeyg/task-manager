@@ -16,6 +16,7 @@
         Urgent
       %div{class: 'col-sm ml-2'}
         Deadline
+      %div{class: 'col-sm ml-2'}
 
     - @tasks.urgent.open_tasks.each do |task|
       %div{class: 'row my-2'}
@@ -25,6 +26,8 @@
           = task.urgent.to_s.titleize
         %div{class: 'col-sm ml-2'}
           = local_time(task.deadline_at) if task.deadline_at
+        %div{class: 'col-sm ml-2'}
+          = button_to 'Delete Task', project_task_path(@project.id, task.id), method: :delete, class: 'btn btn-danger'
 
 - if @tasks.non_urgent.open_tasks.count > 0
   %h3{class: 'text-secondary my-1'} Backlog Tasks
@@ -37,6 +40,7 @@
         Urgent
       %div{class: 'col-sm ml-2'}
         Deadline
+      %div{class: 'col-sm ml-2'}
 
     - @tasks.non_urgent.open_tasks.each do |task|
       %div{class: 'row my-2'}
@@ -46,6 +50,8 @@
           = task.urgent.to_s.titleize
         %div{class: 'col-sm ml-2'}
           = local_time(task.deadline_at) if task.deadline_at
+        %div{class: 'col-sm ml-2'}
+          = button_to 'Delete Task', project_task_path(@project.id, task.id), method: :delete, class: 'btn btn-danger'
 
 - if @project.tasks.closed_tasks.count > 0
   %h3{class: 'text-secondary my-1'}  Closed Tasks
@@ -54,8 +60,15 @@
     %div{class: 'row border-bottom border-secondary'}
       %div{class: 'col-sm ml-2'}
         Title
+      %div{class: 'col-sm ml-2'}
+      %div{class: 'col-sm ml-2'}
+      %div{class: 'col-sm ml-2'}
 
     - @project.tasks.closed_tasks.each do |task|
       %div{class: 'row my-2'}
         %div{class: 'col-sm ml-2'}
           = link_to task.title, project_task_path(@project.id, task.id), class: 'text-success'
+        %div{class: 'col-sm ml-2'}
+        %div{class: 'col-sm ml-2'}
+        %div{class: 'col-sm ml-2'}
+          = button_to 'Delete Task', project_task_path(@project.id, task.id), method: :delete, class: 'btn btn-danger'
